@@ -12,5 +12,5 @@
 ### Install guide
 **NOTE:** xiv-finder-bot is available for public use, no downloads necessary! If you wish to host your own bot, you will need the required dependencies
 
-- `pip3 install discord`
-- `pip3 install requests`
+- ```pip3 install discord```
+- ```pip3 install requests```
