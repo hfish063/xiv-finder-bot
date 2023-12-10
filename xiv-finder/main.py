@@ -10,7 +10,7 @@ Documentation can be found here: [github]
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix = '!', activity = discord.Game(name = "Type !help for list of commands"), intents=intents)
 
 @bot.event
 async def on_ready():
@@ -25,4 +25,5 @@ async def on_ready():
 
     await bot.load_extension("cogs.items")
 
-bot.run("MTE4Mjc5ODcxMDY4MjQyNzQ2Mw.G10A4S.WBaJVQCacFlqrtauHEvdEpDbZoROQGRZGjywXo")
+if __name__ == "__main__":
+    bot.run("MTE4Mjc5ODcxMDY4MjQyNzQ2Mw.G10A4S.WBaJVQCacFlqrtauHEvdEpDbZoROQGRZGjywXo")
