@@ -6,7 +6,7 @@ import requests
 Cog containing item search related commands
 author: haydenfish
 
-TODO: Documentation, util method to validate http status code from ffxivapi requests
+TODO: Documentation, embed creation method
 """
 
 RESULT_LIMIT = 5
@@ -21,32 +21,42 @@ class search(commands.Cog):
         await ctx.send("successful")
 
     """
-    Sends list of embed messages containing name, description, and icon image of specific item
+    Generalized method for search command, takes category type and object name as parameters, returns embed message list containing 
+    related data obtained from api requests
     Search algorithm uses post wildcard matching, e.g. test*
     """
     @commands.command()
-    async def items(self, ctx, *args):
-        results = self.request_result_list(args)
+    async def search(self, ctx, category, *name):
+        # important: convert name tuple into string
+        name_str = ' '.join(name)
+
+        results = self.request_result_list(category, name_str)[0]
+
+        print(results)
 
         for index, item in enumerate(results[:RESULT_LIMIT]):
             embed = discord.Embed(title = item['Name'], color = discord.Color.dark_gray())
 
             embed.set_image(url = self.find_icon(item['Icon']))
-            embed.add_field(
-                name = "Description", 
-                value = self.request_description(item['Url']))
+            embed.set_footer(text = f'Result: {index}')
 
             await ctx.send(embed = embed)
 
     """
-    Sends a single embed message containing name, description, and icon image of specific item
+    Searches for single object from user provided category, returns embed object containing related data
+    obtained from ffxivapi requests
     Search algorithm uses exact matching
-    If item with corresponding name is not found, notify user
     """
     @commands.command()
-    async def item(self, ctx, *args):
-        # placeholder item name
-        result = self.request_match_item("sword of ascension")
+    async def match(self, ctx, category, *name):
+        # important: convert name tuple into string
+        name_str = ' '.join(name)
+
+        result = self.request_match_item(category, name_str)
+
+        # TODO: move to request method
+        if len(result) < 1:
+            raise Exception("Unable to locate object with name - " + name_str)
 
         # important: item data contained in first element of result list
         item = result[0]
@@ -57,25 +67,24 @@ class search(commands.Cog):
         embed = discord.Embed(title = item['Name'], color = discord.Color.dark_blue())
 
         embed.set_image(url = self.find_icon(item['Icon']))
-        embed.add_field(
-            name = "Description",
-            value = self.request_description(item['Url']))
+        embed.set_footer(text = 'Matching query result')
             
         await ctx.send(embed = embed)
 
-    def request_result_list(self, name):
+
+    def request_result_list(self, category, name):
         search_url = URL + "/search"
 
-        response = requests.get(search_url, params = {'indexes': 'Item', 'string': name})
+        response = requests.get(search_url, params = {'indexes': category, 'string': name})
 
         load_response = response.json()
 
-        return load_response['Results'], response.status_code
+        return load_response['Results']
     
-    def request_match_item(self, name):
-        search_url = URL + "/earch"
+    def request_match_item(self, category, name):
+        search_url = URL + "/search"
 
-        response = requests.get(search_url, params = {'indexes': 'Item', 'string': name, 'string_algo': 'match'})
+        response = requests.get(search_url, params = {'indexes': category, 'string': name, 'string_algo': 'match'})
 
         if response.status_code != 200:
             raise Exception("Request failed - invalid http status code: check endpoint")
