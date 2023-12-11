@@ -6,13 +6,13 @@ import requests
 Cog containing item search related commands
 author: haydenfish
 
-TODO: Documentation, embed creation method
+TODO: Documentation, embed creation method, fix missing argument bug
 """
 
 RESULT_LIMIT = 5
 URL = "https://xivapi.com"
 
-class search(commands.Cog):
+class Search(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -58,9 +58,6 @@ class search(commands.Cog):
 
         # important: item data contained in first element of result list
         item = result[0]
-
-        # debugging comment
-        # await ctx.send(str(result))
 
         embed = discord.Embed(title = item['Name'], color = discord.Color.dark_blue())
 
@@ -109,4 +106,4 @@ class search(commands.Cog):
 
 
 async def setup(bot):
-    await bot.add_cog(search(bot))
+    await bot.add_cog(Search(bot))

@@ -27,7 +27,10 @@ async def on_ready():
 
     print("Findxiv bot is in " + str(guild_count) + " guilds")
 
-    await bot.load_extension("cogs.items")
+    await bot.load_extension("cogs.search")
+
+    # stub until class implementation is complete
+    # await bot.load_extension("cogs.character")
 
 if __name__ == "__main__":
     DISCORD_TOKEN  = os.getenv("DISCORD_TOKEN")
