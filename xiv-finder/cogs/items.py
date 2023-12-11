@@ -30,7 +30,7 @@ class search(commands.Cog):
         # important: convert name tuple into string
         name_str = ' '.join(name)
 
-        results = self.request_result_list(category, name_str)[0]
+        results = self.request_result_list(category, name_str)
 
         for index, item in enumerate(results[:RESULT_LIMIT]):
             embed = discord.Embed(title = item['Name'], color = discord.Color.dark_gray())
