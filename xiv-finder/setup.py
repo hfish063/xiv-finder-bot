@@ -1,11 +1,15 @@
 import discord
+import os
 from discord.ext import commands
+from dotenv import find_dotenv, load_dotenv
 
 """
 main module for Findxiv bot
 
 Documentation can be found here: [github]
 """
+
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -26,4 +30,5 @@ async def on_ready():
     await bot.load_extension("cogs.items")
 
 if __name__ == "__main__":
-    bot.run("MTE4Mjc5ODcxMDY4MjQyNzQ2Mw.G10A4S.WBaJVQCacFlqrtauHEvdEpDbZoROQGRZGjywXo")
+    DISCORD_TOKEN  = os.getenv("DISCORD_TOKEN")
+    bot.run(DISCORD_TOKEN)

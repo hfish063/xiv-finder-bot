@@ -32,8 +32,6 @@ class search(commands.Cog):
 
         results = self.request_result_list(category, name_str)[0]
 
-        print(results)
-
         for index, item in enumerate(results[:RESULT_LIMIT]):
             embed = discord.Embed(title = item['Name'], color = discord.Color.dark_gray())
 
