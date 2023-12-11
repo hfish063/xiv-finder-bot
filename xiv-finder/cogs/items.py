@@ -26,10 +26,7 @@ class search(commands.Cog):
     """
     @commands.command()
     async def items(self, ctx, *args):
-        results, status = self.request_result_list(args)
-
-        if status != 200:
-            return
+        results = self.request_result_list(args)
 
         for index, item in enumerate(results[:RESULT_LIMIT]):
             embed = discord.Embed(title = item['Name'], color = discord.Color.dark_gray())
@@ -49,11 +46,9 @@ class search(commands.Cog):
     @commands.command()
     async def item(self, ctx, *args):
         # placeholder item name
-        result, status = self.request_match_item("sword of ascension")
+        result = self.request_match_item("sword of ascension")
 
-        if status != 200:
-            return
-
+        # important: item data contained in first element of result list
         item = result[0]
 
         # debugging comment
@@ -72,17 +67,22 @@ class search(commands.Cog):
         search_url = URL + "/search"
 
         response = requests.get(search_url, params = {'indexes': 'Item', 'string': name})
+
         load_response = response.json()
 
         return load_response['Results'], response.status_code
     
     def request_match_item(self, name):
-        search_url = URL + "/search"
+        search_url = URL + "/earch"
 
         response = requests.get(search_url, params = {'indexes': 'Item', 'string': name, 'string_algo': 'match'})
+
+        if response.status_code != 200:
+            raise Exception("Request failed - invalid http status code: check endpoint")
+
         load_response = response.json()
 
-        return load_response['Results'], response.status_code
+        return load_response['Results']
     
     def request_description(self, id):
         search_url = URL + str(id)
