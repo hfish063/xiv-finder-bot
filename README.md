@@ -12,7 +12,7 @@
   - Where **string** is the name of object to search for
   - Performs wildcard search (result list is limited to **5 items**)
 2. `!match [categoryName] [string]`
-   - Performs **match** search, (only exact matches to string argument are retruend)
+  - Performs **match** search, (only exact matches to string argument are retruend)
 
 ## Additional Info
 ### Install guide
@@ -20,3 +20,5 @@
 
 - ```pip3 install discord```
 - ```pip3 install requests```
+- ```pip3 install os```
+- ```pip3 install python-dotenv```
