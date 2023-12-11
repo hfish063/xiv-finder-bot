@@ -4,6 +4,9 @@
 **xiv-finder-bot** is a personal project of mine.  It provides the ability for discord users to perform various requests from the *XIVAPI* through a command interface
 
 ## Guide
+### Category types
+**Accepts:** Achievement, Title, Action, CraftAction, Trait, PvPAction, PvPTrait, Status, BNpcName, ENpcResident, Companion, Mount, Leve, Emote, InstanceContent, Item, Recipe, Fate, Quest, ContentFinderCondition, Balloon, BuddyEquip, Orchestrion, PlaceName, Weather, World, Map, lore_finder
+
 ### General commands
 1. `!search [categoryname] [string]`
   - Where **string** is the name of object to search for
