@@ -28,6 +28,7 @@ async def on_ready():
     print("Findxiv bot is in " + str(guild_count) + " guilds")
 
     await bot.load_extension("cogs.search")
+    await bot.load_extension("cogs.news")
 
 @bot.event
 async def on_command_error(ctx, error):

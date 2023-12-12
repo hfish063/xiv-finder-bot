@@ -10,6 +10,8 @@ TODO: Command descriptions, embed creation method, fix missing argument bug
 """
 
 RESULT_LIMIT = 5
+
+# ffxiv api url, do not change
 URL = "https://xivapi.com"
 
 class Search(commands.Cog):
