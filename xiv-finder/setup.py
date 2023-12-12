@@ -29,6 +29,15 @@ async def on_ready():
 
     await bot.load_extension("cogs.search")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.reply("Not a valid command, type !help for list of available commands")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.reply("Missing required argument(s), type !help for more details")
+    else:
+        raise error
+
     # stub until class implementation is complete
     # await bot.load_extension("cogs.character")
 

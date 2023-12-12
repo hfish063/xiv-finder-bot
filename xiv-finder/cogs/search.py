@@ -6,7 +6,7 @@ import requests
 Cog containing item search related commands
 author: haydenfish
 
-TODO: Documentation, embed creation method, fix missing argument bug
+TODO: Command descriptions, embed creation method, fix missing argument bug
 """
 
 RESULT_LIMIT = 5
@@ -50,7 +50,7 @@ class Search(commands.Cog):
         # important: convert name tuple into string
         name_str = ' '.join(name)
 
-        result = self.request_match_item(category, name_str)
+        result = self.request_match_result(category, name_str)
 
         # TODO: move to request method
         if len(result) < 1:
@@ -76,7 +76,7 @@ class Search(commands.Cog):
 
         return load_response['Results']
     
-    def request_match_item(self, category, name):
+    def request_match_result(self, category, name):
         search_url = URL + "/search"
 
         response = requests.get(search_url, params = {'indexes': category, 'string': name, 'string_algo': 'match'})
