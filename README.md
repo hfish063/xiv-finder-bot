@@ -16,6 +16,7 @@
 3. `!topics optional:[result_limit]`
     - Sends list of this month's news topics
     - Length of result list depends on optional command argument (default is 10)
+4. *More to come...*
 
 ## Additional Info
 ### Install guide
