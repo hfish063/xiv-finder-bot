@@ -1,7 +1,7 @@
 # xiv-finder-bot
 
 ## Description
-**xiv-finder-bot** is a personal project of mine.  It provides the ability for discord users to perform various requests from the *XIVAPI* through a command interface
+**xiv-finder-bot** is a personal project of mine.  It provides the ability for discord users to perform various requests from the *XIVAPI* through a command interface.  Additionally, you may obtain info regarding the latest game news through the *Lodestone Api*.
 
 ## Guide
 ### Category types
