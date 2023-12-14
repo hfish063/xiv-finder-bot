@@ -26,3 +26,5 @@
 - ```pip3 install requests```
 - ```pip3 install os```
 - ```pip3 install python-dotenv```
+
+<a href="url"><img src="https://github.com/hfish063/xiv-finder-bot/assets/123512041/92332601-38a4-4d1b-b948-fa5ec2c78723" height="240" width="240" ></a>
