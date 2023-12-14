@@ -13,6 +13,9 @@
     - Performs wildcard search (result list is limited to **5 items**)
 2. `!match [categoryName] [string]`
     - Performs **match** search, (only exact matches to string argument are returned)
+3. `!topics optional:[result_limit]`
+    - Sends list of this month's news topics
+    - Length of result list depends on optional command argument (default is 10)
 
 ## Additional Info
 ### Install guide
