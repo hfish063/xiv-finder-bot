@@ -43,5 +43,4 @@ async def on_command_error(ctx, error):
     # await bot.load_extension("cogs.character")
 
 if __name__ == "__main__":
-    DISCORD_TOKEN  = os.getenv("DISCORD_TOKEN")
-    bot.run(DISCORD_TOKEN)
+    bot.run(os.getenv("DISCORD_TOKEN"))
