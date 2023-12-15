@@ -23,6 +23,10 @@ class News(commands.Cog):
     async def topics(self, ctx, result_limit = 10):
         topic_list = self.request_topic_list()
 
+        # TODO: additional verification
+        if int(result_limit) < 1:
+            result_limit = 1
+
         for topic in topic_list[:int(result_limit)]:
             if self.is_same_month(topic):
                 await ctx.send(embed = self.create_news_embed(topic))

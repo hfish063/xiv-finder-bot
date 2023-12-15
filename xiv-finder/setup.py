@@ -14,7 +14,7 @@ load_dotenv()
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix = '!', activity = discord.Game(name = "Type !help for list of commands"), intents=intents)
+bot = commands.Bot(command_prefix = '!', activity = discord.Game(name = "Type !help for list of commands"), intents = intents)
 
 @bot.event
 async def on_ready():
