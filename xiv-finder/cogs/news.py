@@ -21,7 +21,7 @@ class News(commands.Cog):
     """
     @commands.command()
     async def topics(self, ctx, result_limit = 10):
-        topic_list = self.request_topic_list()
+        topic_list = self.request_news_list('topic')
 
         # TODO: additional verification
         if int(result_limit) < 1:
@@ -30,9 +30,20 @@ class News(commands.Cog):
         for topic in topic_list[:int(result_limit)]:
             if self.is_same_month(topic):
                 await ctx.send(embed = self.create_news_embed(topic))
+
+    """
+    Sends list of embed messages containing data relating to this months maintenance (server downtime) events
+    """
+    @commands.command()
+    async def maintenance(self, ctx):
+        maint_list = self.request_news_list('maintenance')
+
+        for result in maint_list:
+            if self.is_same_month(result):
+                await ctx.reply(embed = self.create_maintenance_embed(result))
     
-    def request_topic_list(self):
-        search_url = URL + "/topics"
+    def request_news_list(self, type):
+        search_url = self.create_request_url(type)
 
         response = requests.get(search_url)
 
@@ -40,6 +51,25 @@ class News(commands.Cog):
 
         return load_response
     
+    # TODO: do we really need both of these request methods?
+    # def request_maintenance_list(self):
+    #     search_url = URL + "/maintenance"
+
+    #     response = requests.get(search_url)
+
+    #     load_response = response.json()
+
+    #     return load_response
+    
+    """
+    Return string containing api search url for specified query type
+    """
+    def create_request_url(self, type: str):
+        if type == 'topic':
+            return URL + "/topics"
+        elif type == 'maintenance':
+            return URL + "/maintenance"
+
     def create_news_embed(self, topic):
         if topic is None:
             return 
@@ -51,6 +81,18 @@ class News(commands.Cog):
         news.set_footer(text = topic['time'])
 
         return news
+    
+    def create_maintenance_embed(self, result):
+        if result is None:
+            return
+        
+        maintenance = discord.Embed(title = result['title'], url = result['url'], color = discord.Color.orange())
+
+        maintenance.add_field(name = 'Start: ', value = result['start'])
+        maintenance.add_field(name = 'End: ', value = result['end'])
+        maintenance.set_footer(text = result['id'])
+
+        return maintenance
     
     def is_same_month(self, topic):
         current_month = datetime.now().strftime('%m').replace('0', '')
