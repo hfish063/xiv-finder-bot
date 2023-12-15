@@ -18,10 +18,6 @@ class Search(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def test(self, ctx):
-        await ctx.send("successful")
-
     """
     Generalized method for search command, takes category type and object name as parameters, returns embed message list containing 
     related data obtained from api requests

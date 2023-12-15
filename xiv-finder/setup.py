@@ -30,6 +30,9 @@ async def on_ready():
     await bot.load_extension("cogs.search")
     await bot.load_extension("cogs.news")
 
+    # stub until class implementation is complete
+    # await bot.load_extension("cogs.character")
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
@@ -39,8 +42,13 @@ async def on_command_error(ctx, error):
     else:
         raise error
 
-    # stub until class implementation is complete
-    # await bot.load_extension("cogs.character")
+"""
+Ping command for debugging usage
+TODO: expected removal
+"""
+@commands.command()
+async def ping(self, ctx):
+    await ctx.send("successful")
 
 if __name__ == "__main__":
     bot.run(os.getenv("DISCORD_TOKEN"))
