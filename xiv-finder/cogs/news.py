@@ -51,16 +51,6 @@ class News(commands.Cog):
 
         return load_response
     
-    # TODO: do we really need both of these request methods?
-    # def request_maintenance_list(self):
-    #     search_url = URL + "/maintenance"
-
-    #     response = requests.get(search_url)
-
-    #     load_response = response.json()
-
-    #     return load_response
-    
     """
     Return string containing api search url for specified query type
     """
