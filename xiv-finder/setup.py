@@ -46,8 +46,8 @@ async def on_command_error(ctx, error):
 Ping command for debugging usage
 TODO: expected removal
 """
-@commands.command()
-async def ping(self, ctx):
+@bot.command()
+async def ping(ctx):
     await ctx.send("successful")
 
 if __name__ == "__main__":
