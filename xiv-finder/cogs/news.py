@@ -8,12 +8,12 @@ Cog containing news related commands
 author: haydenfish
 """
 
-# lodestone api url, do not change
-URL = "https://na.lodestonenews.com/news"
-
 class News(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+        # lodestone api url, do not change
+        self.url = "https://na.lodestonenews.com/news"
 
     """
     Sends list of embed messages containing data relating to this months news topics to user,
@@ -56,9 +56,9 @@ class News(commands.Cog):
     """
     def create_request_url(self, type: str):
         if type == 'topic':
-            return URL + "/topics"
+            return self.url + "/topics"
         elif type == 'maintenance':
-            return URL + "/maintenance"
+            return self.url + "/maintenance"
 
     def create_news_embed(self, topic):
         if topic is None:

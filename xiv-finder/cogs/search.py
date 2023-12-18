@@ -11,12 +11,12 @@ TODO: Command descriptions, embed creation method, fix missing argument bug
 
 RESULT_LIMIT = 5
 
-# ffxiv api url, do not change
-URL = "https://xivapi.com"
-
 class Search(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+        # ffxiv api url, do not change
+        self.url = "https://xivapi.com"
 
     """
     Generalized method for search command, takes category type and object name as parameters, returns embed message list containing 
@@ -66,7 +66,7 @@ class Search(commands.Cog):
 
 
     def request_result_list(self, category, name):
-        search_url = URL + "/search"
+        search_url = self.url + "/search"
 
         response = requests.get(search_url, params = {'indexes': category, 'string': name})
 
@@ -75,7 +75,7 @@ class Search(commands.Cog):
         return load_response['Results']
     
     def request_match_result(self, category, name):
-        search_url = URL + "/search"
+        search_url = self.url + "/search"
 
         response = requests.get(search_url, params = {'indexes': category, 'string': name, 'string_algo': 'match'})
 
@@ -87,7 +87,7 @@ class Search(commands.Cog):
         return load_response['Results']
     
     def request_description(self, id):
-        search_url = URL + str(id)
+        search_url = self.url + str(id)
 
         response = requests.get(search_url).json()
 
@@ -100,7 +100,7 @@ class Search(commands.Cog):
         return load_response['Description']
     
     def find_icon(self, name):
-        return URL + name
+        return self.url + name
 
 
 async def setup(bot):
