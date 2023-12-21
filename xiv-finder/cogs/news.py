@@ -29,7 +29,7 @@ class News(commands.Cog):
 
         for topic in topic_list[:int(result_limit)]:
             if self.is_same_month(topic):
-                await ctx.send(embed = self.create_news_embed(topic))
+                await ctx.reply(embed = self.create_news_embed(topic))
 
     """
     Sends list of embed messages containing data relating to this months maintenance (server downtime) events

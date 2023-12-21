@@ -48,7 +48,7 @@ TODO: expected removal
 """
 @bot.command()
 async def ping(ctx):
-    await ctx.send("successful")
+    await ctx.reply("successful")
 
 if __name__ == "__main__":
     bot.run(os.getenv("DISCORD_TOKEN"))

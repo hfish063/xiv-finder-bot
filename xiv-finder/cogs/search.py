@@ -36,7 +36,7 @@ class Search(commands.Cog):
             embed.set_image(url = self.find_icon(item['Icon']))
             embed.set_footer(text = f'Result: {index}')
 
-            await ctx.send(embed = embed)
+            await ctx.reply(embed = embed)
 
     """
     Searches for single object from user provided category, returns embed object containing related data
@@ -62,7 +62,7 @@ class Search(commands.Cog):
         embed.set_image(url = self.find_icon(item['Icon']))
         embed.set_footer(text = 'Matching query result')
             
-        await ctx.send(embed = embed)
+        await ctx.reply(embed = embed)
 
 
     def request_result_list(self, category, name):
