@@ -18,7 +18,8 @@
     - Length of result list depends on optional command argument (default is 10)
 4. `!maintenance`
     - Sends list of this month's maintenance (server downtime) events
-6. *More to come...*
+6. `!status`
+    - Checks current game lodestone servers for (**ongoing**) maintenance
 
 ## Additional Info
 ### Install guide
