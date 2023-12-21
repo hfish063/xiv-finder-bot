@@ -19,7 +19,7 @@
 4. `!maintenance`
     - Sends list of this month's maintenance (server downtime) events
 6. `!status`
-    - Checks current game lodestone servers for (**ongoing**) maintenance
+    - Checks current game and lodestone servers for (**ongoing**) maintenance
 
 ## Additional Info
 ### Install guide
