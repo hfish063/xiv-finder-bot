@@ -86,19 +86,6 @@ class Search(commands.Cog):
 
         return load_response['Results']
     
-    def request_description(self, id):
-        search_url = self.url + str(id)
-
-        response = requests.get(search_url).json()
-
-        load_response = response['BaseParam0']
-        
-        # placeholder if there is no description available
-        if load_response == None:
-            return "Description unavailable"
-        
-        return load_response['Description']
-    
     def find_icon(self, name):
         return self.url + name
 
