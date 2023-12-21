@@ -41,6 +41,16 @@ class News(commands.Cog):
         for result in maint_list:
             if self.is_same_month(result):
                 await ctx.reply(embed = self.create_maintenance_embed(result))
+
+    """
+    Checks the current server status (is maintenance ongoing) and returns list containing data about all ffxiv
+    platforms
+    """
+    @commands.command()
+    async def status(self, ctx):
+        status_list = self.request_news_list('status')
+
+        await ctx.reply(embed = self.create_status_embed(status_list))
     
     def request_news_list(self, type):
         search_url = self.create_request_url(type)
@@ -59,6 +69,8 @@ class News(commands.Cog):
             return self.url + "/topics"
         elif type == 'maintenance':
             return self.url + "/maintenance"
+        elif type == 'status':
+            return self.url + "/maintenance/current"
 
     def create_news_embed(self, topic):
         if topic is None:
@@ -83,6 +95,17 @@ class News(commands.Cog):
         maintenance.set_footer(text = result['id'])
 
         return maintenance
+    
+    def create_status_embed(self, result):
+        if result is None:
+            return
+        
+        status = discord.Embed(title = 'Server Status', color = discord.Color.magenta())
+
+        status.add_field(name = 'Game', value = result['game'])
+        status.add_field(name = 'Lodestone', value = result['lodestone'])
+
+        return status
     
     def is_same_month(self, topic):
         current_month = datetime.now().strftime('%m').replace('0', '')
